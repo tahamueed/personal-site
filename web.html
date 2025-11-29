@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taha Mueed | All Profiles Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --gold: #f1c40f;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --success: #2ecc71;
+      --shadow: 0 10px 30px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    .dark-mode {
+      --primary: #ecf0f1;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --gold: #f1c40f;
+      --light: #2c3e50;
+      --dark: #ecf0f1;
+      --shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1a2a3a, #2c3e50);
+      color: var(--primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: var(--transition);
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+      z-index: 10;
+    }
+    
+    .profile-card {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--secondary), var(--accent), var(--gold));
+    }
+    
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--secondary);
+      margin: 0 auto 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: var(--transition);
+    }
+    
+    .profile-img:hover {
+      transform: scale(1.05);
+      border-color: var(--gold);
+    }
+    
+    .profile-card h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+      color: var(--dark);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .profile-card h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    
+    .profile-card .title {
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    
+    .profile-card p {
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 25px 0;
+    }
+    
+    .stat {
+      text-align: center;
+      position: relative;
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--accent);
+      text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: var(--dark);
+    }
+    
+    .links-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    .link-card {
+      background: var(--light);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .link-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .link-card i {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: var(--secondary);
+      transition: var(--transition);
+    }
+    
+    .link-card:hover i {
+      transform: scale(1.2);
+      color: var(--gold);
+    }
+    
+    .link-card h3 {
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    
+    .link-card p {
+      font-size: 14px;
+      color: var(--dark);
+      opacity: 0.8;
+    }
+    
+    .link-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, var(--secondary), var(--accent), var(--gold));
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+    
+    .link-card:hover::after {
+      transform: scaleX(1);
+    }
+    
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--light);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      z-index: 100;
+      transition: var(--transition);
+    }
+    
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+    }
+    
+    .theme-toggle i {
+      font-size: 20px;
+      color: var(--dark);
+    }
+    
+    .floating-animation {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 15s infinite linear;
+    }
+    
+    .floating-animation:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+    
+    .floating-animation:nth-child(2) {
+      top: 60%;
+      left: 80%;
+      width: 120px;
+      height: 120px;
+      animation-delay: 5s;
+    }
+    
+    .floating-animation:nth-child(3) {
+      top: 80%;
+      left: 20%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 10s;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(10px, 15px) rotate(90deg);
+      }
+      50% {
+        transform: translate(20px, 5px) rotate(180deg);
+      }
+      75% {
+        transform: translate(5px, 20px) rotate(270deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      
+      .links-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-5px);
+      background: var(--accent);
+    }
+    
+    .social-icon::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.2);
+      transform: translateY(100%);
+      transition: var(--transition);
+    }
+    
+    .social-icon:hover::after {
+      transform: translateY(0);
+    }
+    
+    .badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(241, 196, 15, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(241, 196, 15, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(241, 196, 15, 0);
+      }
+    }
+    
+    .glow {
+      text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+    }
+    
+    .quote {
+      font-style: italic;
+      margin: 20px 0;
+      padding: 15px;
+      border-left: 3px solid var(--gold);
+      background: rgba(255,255,255,0.1);
+      border-radius: 0 10px 10px 0;
+    }
+    
+    .achievement {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      padding: 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+    
+    .achievement i {
+      margin-right: 10px;
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-animation"></div>
+  <div class="floating-animation"></div>
+  <div class="floating-animation"></div>
+  
+  <div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon"></i>
+  </div>
+  
+<div class="container">
+    <div class="profile-card">
+      <div class="badge pulse">TOP 1%</div>
+      <img src="profile.png" alt="Profile" class="profile-img">
+      <h1 class="glow">Taha Mueed</h1>
+      <p class="title">Data Analyst & Researcher</p>
+      <p>Building the future through technology, innovation, and strategic investments. Passionate about creating value and making a positive impact on society.</p>
+      
+      <div class="quote">
+        "Success is not about the money you make, but the difference you make in people's lives."
+      </div>
+      
+      <div class="achievement">
+        <i class="fas fa-trophy"></i>
+        <span>Forbes 30 Under 30 Honoree</span>
+      </div>
+      
+      <div class="achievement">
+        <i class="fas fa-award"></i>
+        <span>Global Innovation Award 2023</span>
+      </div>
+      
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">15+</div>
+          <div class="stat-label">Companies</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">$4.2B</div>
+          <div class="stat-label">Net Worth</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">32</div>
+          <div class="stat-label">Countries</div>
+        </div>
+      </div>
+      
+      <div class="social-links">
+        <a href="https://www.facebook.com/tahamueed23?mibextid=ZbWKwL" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://x.com/MEEDU_17?t=tdYKk5OZiwM8Qvx18WIu0A&s=09" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/taha-mueed?utm_source=share_via&utm_content=profile&utm_medium=member_android" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/meedu_121?igsh=bGwzcTdsczZ3Z3Zr" class="social-icon"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    
+    <div class="links-container">
+      <div class="link-card" onclick="window.open('https://www.facebook.com/tahamueed23?mibextid=ZbWKwL', '_blank')">
+        <i class="fab fa-facebook"></i>
+        <h3>Facebook</h3>
+        <p>Connect with me on Facebook</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://www.instagram.com/meedu_121?igsh=bGwzcTdsczZ3Z3Zr', '_blank')">
+        <i class="fab fa-instagram"></i>
+        <h3>Instagram</h3>
+        <p>Follow my journey</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://x.com/MEEDU_17?t=tdYKk5OZiwM8Qvx18WIu0A&s=09', '_blank')">
+        <i class="fab fa-twitter"></i>
+        <h3>X (Twitter)</h3>
+        <p>Read my latest posts</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://www.linkedin.com/in/taha-mueed?utm_source=share_via&utm_content=profile&utm_medium=member_android', '_blank')">
+        <i class="fab fa-linkedin"></i>
+        <h3>LinkedIn</h3>
+        <p>Professional networking</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://www.tiktok.com/@meedu_121?_r=1&_t=ZN-91nOD7clIxy', '_blank')">
+        <i class="fab fa-tiktok"></i>
+        <h3>TikTok</h3>
+        <p>Short videos and clips</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://www.snapchat.com/add/meedu_121?share_id=GaFN9MD2p_I&locale=en-GB', '_blank')">
+        <i class="fab fa-snapchat"></i>
+        <h3>Snapchat</h3>
+        <p>Add me on Snapchat</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://mobile.capcutshare.com/sv2/ZSfC8LHCy/', '_blank')">
+        <i class="fas fa-video"></i>
+        <h3>CapCut</h3>
+        <p>Video edits and templates</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://www.threads.com/@meedu_121', '_blank')">
+        <i class="fab fa-threads"></i>
+        <h3>Threads</h3>
+        <p>Thoughts and discussions</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://pin.it/2pOofB4yS', '_blank')">
+        <i class="fab fa-pinterest"></i>
+        <h3>Pinterest</h3>
+        <p>Ideas and visual bookmarks</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://meedu121.bsky.social', '_blank')">
+        <i class="fas fa-globe"></i>
+        <h3>BlueSky</h3>
+        <p>Decentralized social profile</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://github.com/tahamueed', '_blank')">
+        <i class="fab fa-github"></i>
+        <h3>GitHub</h3>
+        <p>Explore my open-source projects</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://www.kaggle.com/tahamueed', '_blank')">
+        <i class="fab fa-kaggle"></i>
+        <h3>Kaggle</h3>
+        <p>Data science notebooks</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://www.researchgate.net/profile/Taha-Mueed', '_blank')">
+        <i class="fas fa-flask"></i>
+        <h3>ResearchGate</h3>
+        <p>Research publications</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://independent.academia.edu/HafizTahaMueed', '_blank')">
+        <i class="fas fa-university"></i>
+        <h3>Academia.edu</h3>
+        <p>Academic work and papers</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://www.caseconf.com/user/taha-mueed', '_blank')">
+        <i class="fas fa-briefcase"></i>
+        <h3>Case Conferences</h3>
+        <p>Professional case discussions</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://scholar.google.com/citations?user=taha-mueed', '_blank')">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>Google Scholar</h3>
+        <p>Scholarly citations and research</p>
+      </div>
+      <div class="link-card" onclick="window.open('https://huggingface.co/tahamueed23', '_blank')">
+        <i class="fas fa-robot"></i>
+        <h3>Hugging Face</h3>
+        <p>Models, datasets, and NLP projects</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      if (body.classList.contains('dark-mode')) {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    });
+    
+    // Add animation to cards on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.profile-card, .link-card');
+      
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, index * 100);
+      });
+      
+      // Add typing effect to the title
+      const title = document.querySelector('.profile-card h1');
+      const originalText = title.textContent;
+      title.textContent = '';
+      
+      let i = 0;
+      const typeWriter = () => {
+        if (i < originalText.length) {
+          title.textContent += originalText.charAt(i);
+          i++;
+          setTimeout(typeWriter, 100);
+        }
+      };
+      
+      setTimeout(typeWriter, 1000);
+    });
+    
+    // Add parallax effect to floating animations
+    document.addEventListener('mousemove', (e) => {
+      const floatingElements = document.querySelectorAll('.floating-animation');
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      
+      floatingElements.forEach((element, index) => {
+        const speed = (index + 1) * 0.5;
+        const xPos = -(x * speed * 10);
+        const yPos = -(y * speed * 10);
+        
+        element.style.transform = `translate(${xPos}px, ${yPos}px)`;
+      });
+    });
+  </script>
+</body>
+</html>
